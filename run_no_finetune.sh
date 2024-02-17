@@ -1,0 +1,2 @@
+CUDA_VISIBLE_DEVICES=3 python main_no_finetune.py --gpu 0 --way 5 --test_way 5 --shot 5 --exp cpea-main-5way-5shot-nft > cpea-main-5way-5shot-nft.txt &
+CUDA_VISIBLE_DEVICES=3 python main_no_finetune.py --gpu 0 --way 5 --test_way 5 --shot 1 --exp cpea-main-5way-1shot-nft > cpea-main-5way-1shot-nft.txt &

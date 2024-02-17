@@ -65,7 +65,7 @@ class CPEA(nn.Module):
         feat_query = F.normalize(feat_query, p=2, dim=2)
         feat_query = feat_query - torch.mean(feat_query, dim=2, keepdim=True)
 
-        feat_shot = feat_shot.contiguous().reshape(args.shot, -1, n-1, c)  # K x S x n x C
+        feat_shot = feat_shot.contiguous().reshape(args.shot, -1, n -1, c)  # K x S x n x C
         feat_shot = feat_shot.mean(dim=0)  # S x n x C
         feat_shot = F.normalize(feat_shot, p=2, dim=2)
         feat_shot = feat_shot - torch.mean(feat_shot, dim=2, keepdim=True)

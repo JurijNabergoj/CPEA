@@ -5,8 +5,8 @@ from torch.utils.data import Dataset
 from torchvision import transforms
 import numpy as np
 
-IMAGE_PATH = '../datasets/mini/images_224'
-SPLIT_PATH = '../datasets/mini/'
+IMAGE_PATH = '/home/dragik/few-shot/CPEA/datasets/mini_image/'
+SPLIT_PATH = '/home/dragik/few-shot/CPEA/datasets/mini_image/'
 
 
 class MiniImageNet(Dataset):
@@ -25,7 +25,7 @@ class MiniImageNet(Dataset):
 
         for l in lines:
             name, wnid = l.split(',')
-            path = osp.join(IMAGE_PATH, name)
+            path = osp.join(IMAGE_PATH, setname, wnid, name)
             if wnid not in self.wnids:
                 self.wnids.append(wnid)
                 lb += 1
