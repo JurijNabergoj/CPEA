@@ -1,0 +1,2 @@
+CUDA_VISIBLE_DEVICES=0 python main_tiered.py --gpu 0 --way 5 --test_way 5 --shot 5 --exp cpea-main_tiered-5way-5shot > cpea-main_tiered-5way-5shot.txt &
+CUDA_VISIBLE_DEVICES=0 python main_tiered.py --gpu 0 --way 5 --test_way 5 --shot 1 --exp cpea-main_tiered-5way-1shot > cpea-main_tiered-5way-1shot.txt &

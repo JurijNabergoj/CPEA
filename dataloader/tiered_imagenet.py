@@ -1,3 +1,4 @@
+import os
 import os.path as osp
 from PIL import Image
 
@@ -9,8 +10,8 @@ import random
 import math
 import torch
 
-IMAGE_PATH = 'path to images'
-SPLIT_PATH = 'path to splits'
+IMAGE_PATH = 'C:\\Users\\Jurij\\PycharmProjects\\CPEA\\CPEA\\datasets\\tiered'
+SPLIT_PATH = 'C:\\Users\\Jurij\\PycharmProjects\\CPEA\\tiered-imagenet-tools\\tiered_imagenet_split'
 
 
 class TieredImagenet(Dataset):
@@ -31,7 +32,7 @@ class TieredImagenet(Dataset):
 
         for l in lines:
             name, wnid = l.split(',')
-            path = osp.join(IMAGE_PATH, name)
+            path = osp.join(osp.join(IMAGE_PATH, setname), name)
             if wnid not in self.wnids:
                 self.wnids.append(wnid)
                 lb += 1
@@ -61,16 +62,20 @@ class TieredImagenet(Dataset):
             transforms.ToTensor(),
             transforms.Normalize(np.array([x / 255.0 for x in [120.39586422, 115.59361427, 104.54012653]]),
                                  np.array([x / 255.0 for x in [70.68188272, 68.27635443, 72.54505529]]))
-            ])
+        ])
 
     def __len__(self):
         return len(self.data)
 
     def __getitem__(self, i):
         path, label = self.data[i], self.label[i]
+        num_zeros = max(0, 8 - len(str(label)))
+        zeros = '0' * num_zeros
+        img_path = os.path.split(path)[-1] + zeros + str(label) + '.jpg'
+        final_path = path + "\\" + img_path
+        # print(final_path)
         if self.setname == 'train':
-            image = self.transform_train(Image.open(path).convert('RGB'))
+            image = self.transform_train(Image.open(final_path).convert('RGB'))
         else:
-            image = self.transform_val_test(Image.open(path).convert('RGB'))
+            image = self.transform_val_test(Image.open(final_path).convert('RGB'))
         return image, label
-
