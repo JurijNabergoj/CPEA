@@ -1,0 +1,61 @@
+
+Hierarchy
+    Train split:
+        Super-class labels:
+            {1, 2, 3, 4, 5, 6, 9, 10, 15, 17, 18, 19};
+        Super-class names:
+            {fish, flowers, food_containers, fruit_and_vegetables, household_electrical_devices, household_furniture,
+            large_man-made_outdoor_things, large_natural_outdoor_scenes, reptiles, trees, vehicles_1, vehicles_2}.
+
+            {fish:
+                n00000001(aquarium_fish),n00000032(flatfish),n00000067(ray),n00000073(shark),n00000091(trout)
+             flowers:
+                n00000054(orchids),n00000062(poppies),n00000070(roses),n00000082(sunflowers),n00000092(tulips)
+             food_containers:
+                n00000009(bottles),n00000010(bowls),n00000016(cans),n00000028(cups),n00000061(plates)
+             fruit_and_vegetables:
+                n00000000(apples),n00000051(mushrooms),n00000053(oranges),n00000057(pears),n00000083(sweet_peppers)
+             household_electrical_devices:
+                n00000022(clock),n00000039(computer_keyboard),n00000040(lamp),n00000086(telephone),n00000087(television)
+             household_furniture:
+                n00000005(bed),n00000020(chair),n00000025(couch),n00000084(table),n00000094(wardrobe)
+             large_man-made_outdoor_things:
+                n00000012(bridge),n00000017(castle),n00000037(house),n00000068(road),n00000076(skyscraper)
+             large_natural_outdoor_scenes:
+                n00000023(cloud),n00000033(forest),n00000049(mountain),n00000060(plain),n00000071(sea)
+             reptiles:
+                n00000027(crocodiles),n00000029(dinosaurs),n00000044(lizards),n00000078(snakes),n00000093(turtles)
+             trees:
+                n00000047(maple_tree),n00000052(oak_tree),n00000056(palm_tree),n00000059(pine_tree),n00000096(willow_tree)
+             vehicles_1:
+                n00000008(bicycle),n00000013(bus),n00000048(motorcycle),n00000058(pickup_truck)
+             vehicles_2:
+                n00000041(lawn_mower),n00000069(rocket),n00000081(tram),n00000085(tank),n00000089(tractor),n00000090(train)}.
+
+    Validation split:
+        Super-class labels:
+            {8, 11, 13, 16};
+        Super-class names:
+            {large_carnivores,
+            large_omnivores_and_herbivores, non-insect_invertebrates, small_mammals}.
+
+            {large_carnivores:n00000003(bear),n00000042(leopard),n00000043(lion),n00000088(tiger),n00000097(wolf)
+             large_omnivores_and_herbivores:n00000015(camel),n00000019(cattle),n00000021(chimpanzee),n00000031(elephant),n00000038(kangaroo)
+             non-insect_invertebrates:n00000026(crab),n00000045(lobster),n00000077(snail),n00000079(spider),n00000099(worm)
+             small_mammals:n00000036(hamster),n00000050(mouse),n00000065(rabbit),n00000074(shrew),n00000080(squirrel)}.
+
+    Test split:
+        Super-class labels:
+            {0, 7, 12, 14};
+        Super-class names:
+            {aquatic_mammals, insects,
+            medium_mammals, people}.
+
+            {aquatic_mammals:
+                n00000004(beaver),n00000030(dolphin),n00000055(otter),n00000072(seal),n00000095(whale)
+             insects:
+                n00000006(bee),n00000007(beetle),n00000014(butterfly),n00000018(caterpillar),n00000024(cockroach)
+             medium_mammals:
+                n00000034(fox),n00000063(porcupine),n00000064(possum),n00000066(raccoon),n00000075(skunk)
+             people:
+                n00000002(baby),n00000011(boy),n00000035(girl),n00000046(man),n00000098(woman)}.

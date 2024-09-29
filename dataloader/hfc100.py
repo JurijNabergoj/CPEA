@@ -5,6 +5,7 @@ import numpy as np
 from PIL import Image
 from torch.utils.data import Dataset
 from torchvision import transforms
+from CPEA.utils import hierarchy_mapping
 
 data_path = 'C:\\Users\\Jurij\\PycharmProjects\\CPEA\\CPEA\\datasets'
 
@@ -26,6 +27,7 @@ class FC100(Dataset):
 
         data = []
         label = []
+        parent_label = []
 
         folders = [osp.join(path, label) for label in label_list if os.path.isdir(osp.join(path, label))]
 
@@ -34,9 +36,11 @@ class FC100(Dataset):
             for image_path in this_folder_images:
                 data.append(osp.join(this_folder, image_path))
                 label.append(idx)
+                parent_label.append(hierarchy_mapping[this_folder.split('\\')[-1]])
 
         self.data = data
         self.label = label
+        self.parent_label = parent_label
         self.num_class = len(set(label))
         self.setname = setname
 
@@ -62,9 +66,9 @@ class FC100(Dataset):
         return len(self.data)
 
     def __getitem__(self, i):
-        path, label = self.data[i], self.label[i]
+        path, label, parent_label = self.data[i], self.label[i], self.parent_label[i]
         if self.setname == 'train':
             image = self.transform_train(Image.open(path).convert('RGB'))
         else:
             image = self.transform_val_test(Image.open(path).convert('RGB'))
-        return image, label
+        return image, label, parent_label

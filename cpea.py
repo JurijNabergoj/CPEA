@@ -26,13 +26,12 @@ class CPEA(nn.Module):
     def __init__(self, in_dim=384):
         super(CPEA, self).__init__()
 
-        self.fc1 = Mlp(in_features=in_dim, hidden_features=int(in_dim/4), out_features=in_dim)
+        self.fc1 = Mlp(in_features=in_dim, hidden_features=int(in_dim / 4), out_features=in_dim)
         self.fc_norm1 = nn.LayerNorm(in_dim)
 
-        self.fc2 = Mlp(in_features=196**2,  hidden_features=256, out_features=1)
+        self.fc2 = Mlp(in_features=196 ** 2, hidden_features=256, out_features=1)
 
     def forward(self, feat_query, feat_shot, args):
-        
         # Q = number of query images
         # n = number of patch embeddings = 384
         # C = number of image channels 
@@ -40,18 +39,18 @@ class CPEA(nn.Module):
         # L = number of patches
         # K = number of support classes
         # S = number of support images per class
-        
+
         # n = L + 1 (1 for class aware embedding)
-        
+
         # feat_query: Q x n x C
         # feat_shot: KS x n x C
         _, n, c = feat_query.size()
-        print(feat_query.size())
+        # print(feat_query.size())
 
         feat_query = self.fc1(torch.mean(feat_query, dim=1, keepdim=True)) + feat_query  # Q x n x C
-        feat_shot  = self.fc1(torch.mean(feat_shot, dim=1, keepdim=True)) + feat_shot  # KS x n x C
+        feat_shot = self.fc1(torch.mean(feat_shot, dim=1, keepdim=True)) + feat_shot  # KS x n x C
         feat_query = self.fc_norm1(feat_query)
-        feat_shot  = self.fc_norm1(feat_shot)
+        feat_shot = self.fc_norm1(feat_shot)
 
         query_class = feat_query[:, 0, :].unsqueeze(1)  # Q x 1 x C
         query_image = feat_query[:, 1:, :]  # Q x L x C
@@ -65,7 +64,7 @@ class CPEA(nn.Module):
         feat_query = F.normalize(feat_query, p=2, dim=2)
         feat_query = feat_query - torch.mean(feat_query, dim=2, keepdim=True)
 
-        feat_shot = feat_shot.contiguous().reshape(args.shot, -1, n-1, c)  # K x S x n x C
+        feat_shot = feat_shot.contiguous().reshape(args.shot, -1, n - 1, c)  # K x S x n x C
         feat_shot = feat_shot.mean(dim=0)  # S x n x C
         feat_shot = F.normalize(feat_shot, p=2, dim=2)
         feat_shot = feat_shot - torch.mean(feat_shot, dim=2, keepdim=True)
@@ -75,7 +74,7 @@ class CPEA(nn.Module):
         for idx in range(feat_query.size(0)):
             tmp_query = feat_query[idx]  # n x C
             tmp_query = tmp_query.unsqueeze(0)  # 1 x n x C
-            
+
             # out = dense score matrix
             out = torch.matmul(feat_shot, tmp_query.transpose(1, 2))  # S x L x L
             out = out.flatten(1)  # S x L*L

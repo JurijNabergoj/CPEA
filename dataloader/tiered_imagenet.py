@@ -69,6 +69,8 @@ class TieredImagenet(Dataset):
 
     def __getitem__(self, i):
         path, label = self.data[i], self.label[i]
+        if label == 0:
+            label = 1
         num_zeros = max(0, 8 - len(str(label)))
         zeros = '0' * num_zeros
         img_path = os.path.split(path)[-1] + zeros + str(label) + '.jpg'
