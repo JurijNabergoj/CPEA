@@ -26,7 +26,7 @@ class ProtoNet(nn.Module):
 
         # Prototype i is the mean of all instances of features corresponding to labels == i
         z_proto = torch.cat(
-            [z_support[torch.nonzero(support_labels == label)].mean(0) for label in range(n_way)]
+            [z_support[torch.nonzero(support_labels == label)].mean(0) for label in support_labels]
         )
 
         # Compute the euclidean distance from queries to prototypes

@@ -1,13 +1,12 @@
-import os
 import os.path as osp
 import numpy as np
-
 from PIL import Image
-from torch.utils.data import Dataset
+import os
 from torchvision import transforms
-from CPEA.utils import hierarchy_mapping
+from torch.utils.data import Dataset
+from utils import hierarchy_mapping
 
-data_path = 'C:\\Users\\Jurij\\PycharmProjects\\CPEA\\CPEA\\datasets'
+data_path = 'C:\\Users\\jurij\\PycharmProjects\\hfs\\datasets'
 
 
 class FC100(Dataset):

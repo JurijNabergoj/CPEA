@@ -180,6 +180,17 @@ class_to_subclass_dict = {
 }
 
 
+def create_mapping(labels):
+    labels_mapping = {}
+    current_index = 0
+
+    for label in labels:
+        if label not in labels_mapping.keys():
+            labels_mapping[label] = current_index
+            current_index += 1
+
+    return labels_mapping
+
 
 def ensure_path(path):
     if not os.path.exists(path):
